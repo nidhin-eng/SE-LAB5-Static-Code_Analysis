@@ -10,21 +10,21 @@
 | **Missing Docstrings** | Convention | 1, 8, 14, 22, 25, 31, 36, 41, 48 | The module (C0114) and all functions (C0116) are missing docstrings, making the code difficult to understand for others. | Add descriptive docstrings to the module and each function explaining what they do, their arguments, and what they return. |
 | **PEP 8 Whitespace** | Style | Various | There are multiple violations of PEP 8 whitespace rules, primarily "expected 2 blank lines" (Flake8: E302, E305). | Run an auto-formatter like `black` or `ruff format` over the file, or manually add the required blank lines between functions. |
 1. Which issues were the easiest to fix, and which were the hardest? Why?
-Easiest: The whitespace errors (C0303 trailing-whitespace and C0304 final-newline-missing) were by far the easiest. They were purely mechanical text edits (deleting a space or adding a newline) that didn't require any logical thinking or code restructuring.
+Easiest: The whitespace errors (C0303 trailing whitespace and C0304 final newline missing) were by far the easiest. They were purely mechanical text edits (deleting a space or adding a newline) that didn't require any logical thinking or code restructuring.
 
 Hardest: The slightly harder part was going through all the logging statements and making sure they were consistent everywhere. It wasn’t technically difficult, but it required paying close attention to detail across the entire script to avoid missing any instances.
- The W0603: Using the global statement was the most complex fix. It wasn't just a single-line change; it required refactoring the data flow of the entire program. I had to change load_data to return the data instead of modifying a global variable, and then update the main function (and potentially other functions) to pass the stock_data dictionary around as an argument. This is a much deeper change to the code's design.
+ The W0603: Using the global statement was the most complex fix. It wasn't just a single line change; it required refactoring the data flow of the entire program. I had to change load_data to return the data instead of modifying a global variable, and then update the main function (and potentially other functions) to pass the stock_data dictionary around as an argument. This is a much deeper change to the code's design.
 
 2. Did the static analysis tools report any false positives? If so, describe one example.
 
-No, there weren’t any false positives. All the issues reported by pylint and flake8 were valid. The “missing final newline” warning appeared at first, but that was just my mistake — I hadn’t actually pressed Enter at the very end of the file. Once I corrected that, the warning disappeared, confirming that the tools were accurate.
+No, there weren’t any false positives. All the issues reported by pylint and flake8 were valid. The “missing final newline” warning appeared at first, but that was just my mistake I hadn’t actually pressed Enter at the very end of the file. Once I corrected that, the warning disappeared, confirming that the tools were accurate.
 
 3. How would you integrate static analysis tools into your actual software development workflow?
 
 I would integrate tools like pylint and flake8 both locally and in the development pipeline.
-On my local setup, I’d enable them to run automatically before each commit using pre-commit hooks, so basic style and logic issues get caught early.
+On my local setup, I’d enable them to run automatically before each commit using pre commit hooks, so basic style and logic issues get caught early.
 
-For team projects, I’d include them in the CI/CD pipeline (for example, through GitHub Actions or Jenkins), so every pull request is automatically checked before merging. Having these tools also integrated in the IDE (like VS Code) helps get instant feedback while coding, which saves a lot of debugging time later.
+For team projects, I’d include them in the CI/CD pipeline (for example, through GitHub Actions), so every pull request is automatically checked before merging. Having these tools also integrated in the IDE (like VS Code) helps get instant feedback while coding, which saves a lot of debugging time later.
 
 4. What tangible improvements did you observe in the code quality, readability, or potential robustness after applying the fixes?
 

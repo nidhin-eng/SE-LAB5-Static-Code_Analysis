@@ -1,10 +1,3 @@
-"""
-inventory_system.py
-
-A simple JSON-based inventory management system.
-Provides functions to add, remove, and check stock levels.
-"""
-
 import json
 import logging
 
